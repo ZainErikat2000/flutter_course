@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:udemy_course_project/app/Custom_Widgets/CustomeElevatedButton.dart';
+import 'package:udemy_course_project/app/Custom_Widgets/CustomElevatedButton.dart';
+import 'package:udemy_course_project/app/Custom_Widgets/SocialSignInButton.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -37,13 +37,14 @@ class SignInPage extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          CustomElevatedButton(
+          SocialSignInButton(
+            borderRadius:24,
             height: 32,
-            borderRadius: 24,
             color: Colors.white,
             callBack: _signInWithGoogle,
+            asset: 'images/google-logo.png',
             child: const Text(
-              'Sign in with Google',
+              'Sign in with google',
               style: TextStyle(
                 color: Colors.black,
               ),
@@ -52,12 +53,18 @@ class SignInPage extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          CustomElevatedButton(
-            borderRadius: 24,
+          SocialSignInButton(
+            borderRadius:24,
             height: 32,
             color: Colors.blueAccent,
             callBack: _signInWithFacebook,
-            child: const Text('Sign in with Facebook'),
+            asset: 'images/facebook-logo.png',
+            child: const Text(
+              'Sign in with Facebook',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
           ),
           const SizedBox(
             height: 16,
@@ -81,7 +88,8 @@ class SignInPage extends StatelessWidget {
             'or',
             style: TextStyle(
               fontSize: 16,
-            ),textAlign: TextAlign.center,
+            ),
+            textAlign: TextAlign.center,
           ),
           const SizedBox(
             height: 16,
