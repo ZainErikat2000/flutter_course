@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'Home.dart';
+import 'package:udemy_course_project/Landing_Page.dart';
+import 'Home_Page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'udemy course',
       theme: ThemeData(primarySwatch: Colors.red,),
-      home: const Home(),
+      home: const LandingPage(),
     );
   }
 }

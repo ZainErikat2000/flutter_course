@@ -1,9 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:udemy_course_project/app/Custom_Widgets/CustomElevatedButton.dart';
 import 'package:udemy_course_project/app/Custom_Widgets/SocialSignInButton.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
+  const SignInPage({Key? key, required this.onSignIn}) : super(key: key);
+
+  final void Function(User?) onSignIn;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class SignInPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          //Sign In text
           const Text(
             'Sign In',
             style: TextStyle(
@@ -37,8 +42,9 @@ class SignInPage extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
+          //google sign in button
           SocialSignInButton(
-            borderRadius:24,
+            borderRadius: 24,
             height: 32,
             color: Colors.white,
             callBack: _signInWithGoogle,
@@ -53,8 +59,9 @@ class SignInPage extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
+          //facebook sign in button
           SocialSignInButton(
-            borderRadius:24,
+            borderRadius: 24,
             height: 32,
             color: Colors.blueAccent,
             callBack: _signInWithFacebook,
@@ -69,6 +76,7 @@ class SignInPage extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
+          //email sign in button
           CustomElevatedButton(
             borderRadius: 24,
             height: 32,
@@ -84,6 +92,7 @@ class SignInPage extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
+          //'or' text
           const Text(
             'or',
             style: TextStyle(
@@ -94,6 +103,7 @@ class SignInPage extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
+          //anonymous sign in button
           CustomElevatedButton(
             borderRadius: 24,
             height: 32,
@@ -111,7 +121,20 @@ class SignInPage extends StatelessWidget {
     );
   }
 
-  void _signInAnonymously() {}
+  void _signInAnonymously() async {
+    try {
+      UserCredential userCred = await FirebaseAuth.instance.signInAnonymously();
+      onSignIn(userCred.user);
+
+      if (kDebugMode) {
+        print("anonymous user ID: ${userCred.user?.uid}");
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e.toString());
+      }
+    }
+  }
 
   void _signInWithGoogle() {}
 
